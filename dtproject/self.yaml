@@ -1,6 +1,6 @@
-name: "<LIBRARY_NAME_HERE>"
+name: "duckietown-messages"
 maintainer:
-    name: "<YOUR_FULL_NAME>"
-    email: "<YOUR_EMAIL_ADDRESS>"
-description: "<LIBRARY_DESCRIPTION_HERE>"
+    name: "Andrea F. Daniele"
+    email: "afdaniele@duckietown.com"
+description: "Duckietown messages for the DTPS middleware"
 version: 0.0.0

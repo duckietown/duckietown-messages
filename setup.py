@@ -1,13 +1,13 @@
 from setuptools import find_packages, setup
 
 # :==> Fill in your project data here
-package_name = '<LIBRARY_NAME>'
-library_webpage = '<LIBRARY_WEB_PAGE>'
-maintainer = '<YOUR_FULL_NAME>'
-maintainer_email = '<YOUR_EMAIL_ADDRESS>'
-short_description = '<BRIEF_DESCRIPTION>'
+package_name = "duckietown-messages"
+library_webpage = "https://github.com/duckietown/duckietown-messages"
+maintainer = "Andrea F. Daniele"
+maintainer_email = "afdaniele@duckietown.com"
+short_description = "Duckietown messages for the DTPS middleware"
 full_description = """
-<LONG_DESCRIPTION>
+Duckietown messages for the DTPS middleware
 """
 
 if "<" in package_name:
@@ -31,7 +31,7 @@ def get_version_from_source(filename):
     return v
 
 
-version = get_version_from_source("src/duckietown_pondcleaner/__init__.py")
+version = get_version_from_source("src/duckietown_messages/__init__.py")
 
 # read project dependencies
 # NO - dependencies.txt is for testing dependiences - EVERYTHING PINNED
@@ -57,9 +57,7 @@ description = """
     underline=underline,
 )
 
-console_scripts = [
-    "dt-pc-demo = duckietown_pondcleaner:dt_pc_demo",
-]
+console_scripts = []
 
 # setup package
 setup(

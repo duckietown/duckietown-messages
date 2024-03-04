@@ -1,7 +1,7 @@
-tag=duckietown_pondcleaner
+tag=duckietown_messages
 
-regular_packages=duckietown_pondcleaner
-test_packages=duckietown_pondcleaner_tests
+regular_packages=duckietown_messages
+test_packages=duckietown_messages_tests
 cover_packages=$(test_packages),$(regular_packages)
 
 
@@ -78,7 +78,7 @@ run:
 
 run-with-mounted-src:
 	mkdir -p out-docker
-	docker run -it -v $(PWD)/src:/duckietown_pondcleaner/src:ro -v $(PWD)/out-docker:/out $(tag)
+	docker run -it -v $(PWD)/src:/duckietown_messages/src:ro -v $(PWD)/out-docker:/out $(tag)
 
 
 coverage-report:
