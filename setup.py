@@ -40,7 +40,12 @@ version = get_version_from_source("src/duckietown_messages/__init__.py")
 # with open(dependencies_file, 'rt') as fin:
 #     dependencies = list(filter(lambda line: not line.startswith('#'), fin.read().splitlines()))
 
-install_requires = []
+install_requires = [
+    "pydantic",
+    "numpy",
+    "pyturbojpeg",
+    "Pillow",
+]
 tests_require = []
 
 # compile description
