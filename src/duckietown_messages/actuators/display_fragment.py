@@ -3,7 +3,7 @@ import numpy as np
 from ..base import BaseMessage
 from ..sensors.image import Image
 from ..standard.header import Header, AUTO
-from ..standard.roi import ROI
+from ..geometry_2d.roi import ROI
 
 
 class DisplayFragment(BaseMessage):

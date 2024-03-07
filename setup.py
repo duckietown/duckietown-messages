@@ -45,6 +45,7 @@ install_requires = [
     "numpy",
     "pyturbojpeg",
     "Pillow",
+    "pytransform3d"
 ]
 tests_require = []
 

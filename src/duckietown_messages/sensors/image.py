@@ -73,12 +73,12 @@ class Image(BaseMessage):
     def from_np(cls,
                 im: np.ndarray,
                 encoding: Literal["rgb8", "rgba8", "bgr8", "bgra8", "mono1", "mono8", "mono16"],
-                header: Header) -> 'Image':
+                header: Header = None) -> 'Image':
         assert encoding in SUPPORTED_ENCODINGS
         encoder: ImageEncoding = SUPPORTED_ENCODINGS[encoding]
         h, w, c, *_ = im.shape + (1,)
         msg = Image(
-            header=header,
+            header=header or Header(),
             width=w,
             height=h,
             encoding=encoding,
@@ -91,28 +91,28 @@ class Image(BaseMessage):
         return msg
 
     @classmethod
-    def from_rgb(cls, im: np.ndarray, header: Header) -> 'Image':
+    def from_rgb(cls, im: np.ndarray, header: Header = None) -> 'Image':
         # validate image shape and number of channels
         assert len(im.shape) == 3 and im.shape[2] == 3
         # ---
         return cls.from_np(im, "rgb8", header)
 
     @classmethod
-    def from_rgba(cls, im: np.ndarray, header: Header) -> 'Image':
+    def from_rgba(cls, im: np.ndarray, header: Header = None) -> 'Image':
         # validate image shape and number of channels
         assert len(im.shape) == 3 and im.shape[2] == 4
         # ---
         return cls.from_np(im, "rgba8", header)
 
     @classmethod
-    def from_mono8(cls, im: np.ndarray, header: Header) -> 'Image':
+    def from_mono8(cls, im: np.ndarray, header: Header = None) -> 'Image':
         # validate image shape
         assert len(im.shape) == 2
         # ---
         return cls.from_np(im, "mono8", header)
 
     @classmethod
-    def from_mono1(cls, im: np.ndarray, header: Header) -> 'Image':
+    def from_mono1(cls, im: np.ndarray, header: Header = None) -> 'Image':
         # validate image shape
         assert len(im.shape) == 2
         # convert mono8 to mono1
