@@ -29,7 +29,7 @@ class RGBA(BaseMessage):
         )
 
     @classmethod
-    def from_list(cls, lst: List[float], header: Header = None) -> 'RGB':
+    def from_list(cls, lst: List[float], header: Header = None) -> 'RGBA':
         assert len(lst) == 4
         return cls(
             header=header or Header(),
