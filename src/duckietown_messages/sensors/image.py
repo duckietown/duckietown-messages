@@ -82,7 +82,7 @@ class Image(BaseMessage):
             width=w,
             height=h,
             encoding=encoding,
-            step=w * c * encoder.channel_size_bits,
+            step=w * c * int(encoder.channel_size_bits / 8),
             data=encoder.pack(im).tobytes(),
             # TODO: this always True?
             is_bigendian=False
@@ -129,9 +129,10 @@ class Image(BaseMessage):
         if self.encoding == "mono1":
             w, h, c = (self.width, self.height, 1)
         else:
-            w, h, c = (self.width, self.height, int(self.step / (self.width * encoder.channel_size_bits)))
+            w, h, c = (self.width, self.height, int(self.step / (self.width * (encoder.channel_size_bits / 8))))
         # validate number of channel
-        assert c == encoder.num_channels
+        assert c == encoder.num_channels, "Number of channels does not match the encoding. Expected %d, got %d." % (
+            encoder.num_channels, c)
         # turn bytes into array
         im = np.frombuffer(self.data, dtype=np.uint8)
         # unpack data
