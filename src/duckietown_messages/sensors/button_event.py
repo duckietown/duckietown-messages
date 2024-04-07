@@ -1,5 +1,7 @@
 from enum import IntEnum
 
+from pydantic import Field
+
 from ..base import BaseMessage
 from ..standard.header import Header, AUTO
 
@@ -16,4 +18,4 @@ class ButtonEvent(BaseMessage):
     header: Header = AUTO
 
     # event ID
-    type: InteractionEvent
+    type: InteractionEvent = Field(description="Type of the event")

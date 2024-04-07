@@ -1,6 +1,7 @@
 from typing import Optional
 
 import numpy as np
+from pydantic import Field
 
 from ..base import BaseMessage
 from ..standard.header import Header, AUTO
@@ -12,10 +13,10 @@ from .quaternion import Quaternion
 class Transformation(BaseMessage):
     header: Header = AUTO
 
-    source: Optional[str]
-    target: Optional[str]
-    position: Position
-    rotation: Quaternion
+    source: Optional[str] = Field(description="The frame id of the source frame")
+    target: Optional[str] = Field(description="The frame id of the target frame")
+    position: Position = Field(description="The position of the target frame in the source frame")
+    rotation: Quaternion = Field(description="The rotation of the target frame in the source frame")
 
     @classmethod
     def from_pq(cls,

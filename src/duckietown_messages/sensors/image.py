@@ -2,6 +2,7 @@ import dataclasses
 from typing import Callable, Dict, Literal
 
 import numpy as np
+from pydantic import Field
 
 from ..base import BaseMessage
 from ..standard.header import Header, AUTO
@@ -44,10 +45,10 @@ class Image(BaseMessage):
     header: Header = AUTO
 
     # image width, that is, number of columns
-    width: int
+    width: int = Field(description="Width of the image", ge=0)
 
     # image height, that is, number of rows
-    height: int
+    height: int = Field(description="Height of the image", ge=0)
 
     # encoding of pixels: channel meaning, ordering, and size
     #   valid values are:
@@ -58,16 +59,17 @@ class Image(BaseMessage):
     #    - "mono1"
     #    - "mono8"
     #    - "mono16"
-    encoding: Literal["rgb8", "rgba8", "bgr8", "bgra8", "mono1", "mono8", "mono16"]
+    encoding: Literal["rgb8", "rgba8", "bgr8", "bgra8", "mono1", "mono8", "mono16"] = \
+        Field(description="The encoding of the pixels")
 
     # length of a full row in bytes
-    step: int
+    step: int = Field(description="Full row length in bytes", ge=0)
 
     # actual data, size is (step * rows)
-    data: bytes
+    data: bytes = Field(description="Pixel data. Size must be (step * rows)")
 
     # is this data bigendian?
-    is_bigendian: bool
+    is_bigendian: bool = Field(description="Is the data bigendian?")
 
     @classmethod
     def from_np(cls,
