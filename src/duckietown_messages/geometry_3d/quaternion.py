@@ -1,4 +1,5 @@
 import numpy as np
+from pydantic import Field
 
 from ..base import BaseMessage
 from ..standard.header import Header, AUTO
@@ -7,10 +8,10 @@ from ..standard.header import Header, AUTO
 class Quaternion(BaseMessage):
     header: Header = AUTO
 
-    w: float
-    x: float
-    y: float
-    z: float
+    w: float = Field(description="W component of the quaternion")
+    x: float = Field(description="X component of the quaternion")
+    y: float = Field(description="Y component of the quaternion")
+    z: float = Field(description="Z component of the quaternion")
 
     @classmethod
     def from_q(cls, q: np.ndarray, header: Header = None) -> 'Quaternion':

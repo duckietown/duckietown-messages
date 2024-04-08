@@ -4,7 +4,7 @@ from duckietown_messages.base import BaseMessage
 from duckietown_messages.standard.header import Header, AUTO
 
 
-class Boolean(BaseMessage):
+class Float(BaseMessage):
     header: Header = AUTO
 
-    data: bool = Field(description="Boolean value payload")
+    data: float = Field(description="Floating point number payload")

@@ -1,6 +1,7 @@
 from typing import Literal
 
 import numpy as np
+from pydantic import Field
 
 from ..base import BaseMessage
 from ..standard.header import Header, AUTO
@@ -15,10 +16,10 @@ class CompressedImage(BaseMessage):
     #   valid values are:
     #    - "jpeg"
     #    - "png"
-    format: Literal["jpeg", "png"]
+    format: Literal["jpeg", "png"] = Field(description="The format of the image data")
 
     # compressed data buffer
-    data: bytes
+    data: bytes = Field(description="The compressed image data")
 
     @classmethod
     def from_rgb(cls, im: np.ndarray, encoding: Literal["jpeg", "png"], header: Header) -> 'CompressedImage':
