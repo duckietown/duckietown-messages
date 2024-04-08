@@ -8,3 +8,7 @@ class Mode(IntEnum):
 
 class DroneModeMsg(BaseMessage):
     mode: Mode
+    
+class DroneModeResponse(BaseMessage):
+    previous_mode: Mode
+    current_mode: Mode
