@@ -1,3 +1,4 @@
+from pydantic import Field
 from ..base import BaseMessage
 from ..standard.header import Header, AUTO
 
@@ -7,7 +8,7 @@ from ..standard.header import Header, AUTO
 class BatteryState(BaseMessage):
     header: Header = AUTO
 
-    voltage: float
-    present: bool
+    voltage: float = Field(description="Voltage of the battery", ge=0)
+    present: bool = Field(description="True if the battery is present, False otherwise")
 
 
