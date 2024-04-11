@@ -3,4 +3,4 @@ maintainer:
     name: "Andrea F. Daniele"
     email: "afdaniele@duckietown.com"
 description: "Duckietown messages for the DTPS middleware"
-version: 0.0.10
+version: 0.0.11
