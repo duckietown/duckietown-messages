@@ -9,6 +9,6 @@ class AngularVelocities(BaseMessage):
     header: Header = AUTO
 
     # angular acceleration about the 3 axis
-    x: float = Field(description="Angular acceleration about the x axis")
-    y: float = Field(description="Angular acceleration about the y axis")
-    z: float = Field(description="Angular acceleration about the z axis")
+    x: float = Field(description="Angular velocities about the x axis [rad/s]")
+    y: float = Field(description="Angular velocities about the y axis [rad/s]")
+    z: float = Field(description="Angular velocities about the z axis [rad/s]")
