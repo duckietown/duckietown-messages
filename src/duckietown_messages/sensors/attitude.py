@@ -7,7 +7,8 @@ class Attitude(BaseMessage):
     # header
     header: Header = AUTO
 
-    # angular acceleration about the 3 axis
-    roll: float = Field(description="Roll angle in degrees", ge=-180, le=180)
-    pitch: float = Field(description="Pitch angle in degrees", ge=-180, le=180)
-    yaw: float = Field(description="Yaw angle in degrees", ge=-180, le=180)
+    # orientation in quaternion form
+    x: float = Field(description="Quaternion x component", ge=-1, le=1)
+    y: float = Field(description="Quaternion y component", ge=-1, le=1)
+    z: float = Field(description="Quaternion z component", ge=-1, le=1)
+    w: float = Field(description="Quaternion w component", ge=-1, le=1)
