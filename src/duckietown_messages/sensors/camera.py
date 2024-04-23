@@ -1,10 +1,6 @@
-from typing import Optional
-
 from pydantic import Field
 
 from .generic import Sensor
-from ..base import BaseMessage
-from ..standard.header import Header, AUTO
 
 
 class Camera(Sensor):
