@@ -2,7 +2,7 @@ from duckietown_messages.base import BaseMessage
 from pydantic import Field
 
 
-class FlightControllerParameters(BaseMessage):
+class AttitudePIDParameters(BaseMessage):
     
     roll_pid_kp: float = Field(description="Roll PID proportional gain")
     roll_pid_ki: float = Field(description="Roll PID integral gain")
