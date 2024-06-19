@@ -12,5 +12,5 @@ class CarLights(BaseMessage):
     # lights
     front_left: RGBA = Field(description="Front left light color and intensity")
     front_right: RGBA = Field(description="Front right light color and intensity")
-    rear_left: RGBA = Field(description="Rear left light color and intensity")
-    rear_right: RGBA = Field(description="Rear right light color and intensity")
+    back_left: RGBA = Field(description="Back left light color and intensity")
+    back_right: RGBA = Field(description="Back right light color and intensity")
