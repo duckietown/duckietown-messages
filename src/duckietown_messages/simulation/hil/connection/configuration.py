@@ -1,10 +1,12 @@
+from typing import Optional
+
 from ....base import BaseMessage
 from ....network.dtps.context import DTPSContextMsg
 
 
 class HILConnectionConfiguration(BaseMessage):
     # source
-    source: DTPSContextMsg
+    source: Optional[DTPSContextMsg]
 
     # agent information
     agent_name: str
