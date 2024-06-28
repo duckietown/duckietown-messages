@@ -40,3 +40,7 @@ class RGBA(BaseMessage):
             b=lst[2],
             a=lst[3],
         )
+
+    @property
+    def hex(self) -> str:
+        return f"#{int(self.r * 255):02x}{int(self.g * 255):02x}{int(self.b * 255):02x}"
