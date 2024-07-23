@@ -24,7 +24,7 @@ class BatteryState(BaseMessage):
     """
 
     header: Header = AUTO
-    voltage: float = Field(description="Voltage of the battery", ge=0, default=0.0)
+    voltage: float = Field(description="Voltage of the battery", ge=-1, default=0.0)
     present: bool = Field(description="True if the battery is present, False otherwise", default=False)
     charge: float = Field(description="Current battery charge in Ah", ge=0, default=0.0)
     capacity: float = Field(description="Capacity of the battery in Ah", ge=0, default=0.0)
