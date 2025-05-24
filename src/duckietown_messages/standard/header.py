@@ -17,6 +17,8 @@ class Header(BaseMessage):
     frame: Optional[str] = Field(description="Reference frame this data is captured in", default=None)
     # auxiliary data for the message
     txt: Optional[dict] = Field(description="Auxiliary data attached to the message", default=None)
+    # timestamp
+    timestamp: Optional[float] = Field(description="Timestamp", default=None)
 
 
 AUTO = Field(default_factory=Header, description="Auto-generated header")
