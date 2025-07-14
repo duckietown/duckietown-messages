@@ -47,7 +47,9 @@ install_requires = [
     "Pillow",
     "pytransform3d"
 ]
-tests_require = []
+tests_require = [
+    "dtps-http",
+]
 
 # compile description
 underline = "=" * (len(package_name) + len(short_description) + 2)
