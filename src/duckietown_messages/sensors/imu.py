@@ -14,9 +14,9 @@ class Imu(BaseMessage):
     """
     header : Header = AUTO
     
-    orientation : Optional[Quaternion]
-    orientation_covariance : Optional[List[float]] = Field(max_items=9, min_items=9)
-    angular_velocity : Optional[AngularVelocities]
-    angular_velocity_covariance : Optional[List[float]] = Field(max_items=9, min_items=9)
-    linear_acceleration : Optional[LinearAccelerations]
-    linear_acceleration_covariance : Optional[List[float]] = Field(max_items=9, min_items=9)
+    orientation : Optional[Quaternion] = None
+    orientation_covariance : Optional[List[float]] = Field(None, max_length=9, min_length=9)
+    angular_velocity : Optional[AngularVelocities] = None
+    angular_velocity_covariance : Optional[List[float]] = Field(None, max_length=9, min_length=9)
+    linear_acceleration : Optional[LinearAccelerations] = None
+    linear_acceleration_covariance : Optional[List[float]] = Field(None, max_length=9, min_length=9)
