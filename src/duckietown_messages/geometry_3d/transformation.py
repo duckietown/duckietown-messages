@@ -13,8 +13,8 @@ from .quaternion import Quaternion
 class Transformation(BaseMessage):
     header: Header = AUTO
 
-    source: Optional[str] = Field(description="The frame id of the source frame")
-    target: Optional[str] = Field(description="The frame id of the target frame")
+    source: Optional[str] = Field(None, description="The frame id of the source frame")
+    target: Optional[str] = Field(None, description="The frame id of the target frame")
     position: Position = Field(description="The position of the target frame in the source frame")
     rotation: Quaternion = Field(description="The rotation of the target frame in the source frame")
 

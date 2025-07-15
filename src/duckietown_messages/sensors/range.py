@@ -11,4 +11,4 @@ class Range(BaseMessage):
     header: Header = AUTO
 
     # measured distance (meters, null if out-of-range)
-    data: Union[float, None] = Field(description="Measured distance (meters, null if out-of-range)", ge=0)
+    data: Union[float, None] = Field(None, description="Measured distance (meters, null if out-of-range)", ge=0)

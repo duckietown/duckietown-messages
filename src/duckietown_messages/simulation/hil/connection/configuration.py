@@ -6,7 +6,7 @@ from ....network.dtps.context import DTPSContextMsg
 
 class HILConnectionConfiguration(BaseMessage):
     # simulator
-    simulator: Optional[DTPSContextMsg]
+    simulator: Optional[DTPSContextMsg] = None
 
     # agent information
     agent_name: str

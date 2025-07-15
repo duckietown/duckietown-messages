@@ -41,13 +41,15 @@ version = get_version_from_source("src/duckietown_messages/__init__.py")
 #     dependencies = list(filter(lambda line: not line.startswith('#'), fin.read().splitlines()))
 
 install_requires = [
-    "pydantic",
+    "pydantic>=2,<3",
     "numpy",
     "pyturbojpeg",
     "Pillow",
     "pytransform3d"
 ]
-tests_require = []
+tests_require = [
+    "dtps-http",
+]
 
 # compile description
 underline = "=" * (len(package_name) + len(short_description) + 2)
