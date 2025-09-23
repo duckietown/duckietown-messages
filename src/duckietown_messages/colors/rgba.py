@@ -7,6 +7,9 @@ from duckietown_messages.standard.header import Header, AUTO
 
 
 class RGBA(BaseMessage):
+    # Use __slots__ for memory efficiency
+    __slots__ = ()
+    
     header: Header = AUTO
 
     # intensities of the red, green, and blue components of the color in the range [0, 1]
@@ -23,7 +26,7 @@ class RGBA(BaseMessage):
     @classmethod
     def zero(cls, header: Header = None) -> 'RGBA':
         return cls(
-            header=header or Header(),
+            header=header or Header.get_default(),
             r=0,
             g=0,
             b=0,
@@ -34,7 +37,7 @@ class RGBA(BaseMessage):
     def from_list(cls, lst: List[float], header: Header = None) -> 'RGBA':
         assert len(lst) == 4
         return cls(
-            header=header or Header(),
+            header=header or Header.get_default(),
             r=lst[0],
             g=lst[1],
             b=lst[2],

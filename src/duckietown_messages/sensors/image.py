@@ -41,6 +41,9 @@ SUPPORTED_ENCODINGS: Dict[str, ImageEncoding] = {
 
 
 class Image(BaseMessage):
+    # Use __slots__ for memory efficiency  
+    __slots__ = ()
+    
     # header
     header: Header = AUTO
 
@@ -80,7 +83,7 @@ class Image(BaseMessage):
         encoder: ImageEncoding = SUPPORTED_ENCODINGS[encoding]
         h, w, c, *_ = im.shape + (1,)
         msg = Image(
-            header=header or Header(),
+            header=header or Header.get_default(),
             width=w,
             height=h,
             encoding=encoding,
