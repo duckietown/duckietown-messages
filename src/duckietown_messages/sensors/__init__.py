@@ -7,3 +7,4 @@ from .linear_accelerations import LinearAccelerations
 from .range import Range
 from .range_finder import RangeFinder
 from .temperature import Temperature
+from .imu import Imu
