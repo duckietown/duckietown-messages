@@ -8,6 +8,8 @@ from duckietown_messages.utils.exceptions import DataDecodingError
 
 
 class BaseMessage(BaseModel, metaclass=ABCMeta):
+    # Use __slots__ to reduce memory overhead in subclasses
+    __slots__ = ()
 
     # TODO: add a field for the header and remove it from the subclasses
 
@@ -28,4 +30,5 @@ class BaseMessage(BaseModel, metaclass=ABCMeta):
             raise DataDecodingError(f"Error while parsing {cls.__name__} from {rd}: {e}", e)
 
     def to_rawdata(self) -> RawData:
-        return RawData.cbor_from_native_object(self.dict())
+        # Use model_dump() instead of deprecated dict() method for better performance
+        return RawData.cbor_from_native_object(self.model_dump())
