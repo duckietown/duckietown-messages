@@ -8,8 +8,6 @@ from duckietown_messages.utils.exceptions import DataDecodingError
 
 
 class BaseMessage(BaseModel, metaclass=ABCMeta):
-    # Use __slots__ to reduce memory overhead in subclasses
-    __slots__ = ()
 
     # TODO: add a field for the header and remove it from the subclasses
 

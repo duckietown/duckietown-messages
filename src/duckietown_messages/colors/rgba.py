@@ -7,9 +7,6 @@ from duckietown_messages.standard.header import Header, AUTO
 
 
 class RGBA(BaseMessage):
-    # Use __slots__ for memory efficiency
-    __slots__ = ()
-    
     header: Header = AUTO
 
     # intensities of the red, green, and blue components of the color in the range [0, 1]

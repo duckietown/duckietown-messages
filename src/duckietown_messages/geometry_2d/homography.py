@@ -7,9 +7,6 @@ from ..standard.header import Header, AUTO
 
 
 class Homography(BaseMessage):
-    # Use __slots__ for memory efficiency
-    __slots__ = ()
-    
     header: Header = AUTO
 
     data: List[float] = Field(description="Homography matrix (flattened)")

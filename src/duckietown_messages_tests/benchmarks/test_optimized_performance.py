@@ -73,7 +73,6 @@ class TestOptimizedPerformance(unittest.TestCase):
         """Test optimized message creation with AUTO headers."""
         
         class TestMessage(BaseMessage):
-            __slots__ = ()  # Test memory optimization
             header: Header = AUTO
             data: str = Field(description="Test data")
             value: int = Field(description="Test value", default=42)
@@ -104,7 +103,6 @@ class TestOptimizedPerformance(unittest.TestCase):
         """Test that serialization uses optimized model_dump."""
         
         class TestMessage(BaseMessage):
-            __slots__ = ()
             header: Header = AUTO
             data: str = Field(description="Test data")
         
@@ -215,32 +213,6 @@ class TestOptimizedPerformance(unittest.TestCase):
         self.assertIn('b', data)
         self.assertEqual(data['a'], 9)
         self.assertEqual(data['b'], 7.0)
-
-    def test_memory_efficiency(self):
-        """Test that __slots__ reduces memory overhead."""
-        
-        class SlottedMessage(BaseMessage):
-            __slots__ = ()
-            header: Header = AUTO
-            data: str = Field(description="Test data")
-        
-        class NonSlottedMessage(BaseMessage):
-            header: Header = AUTO
-            data: str = Field(description="Test data")
-        
-        # Create instances to test they work
-        slotted = SlottedMessage(data="test")
-        non_slotted = NonSlottedMessage(data="test")
-        
-        # Both should function the same
-        self.assertEqual(slotted.data, "test")
-        self.assertEqual(non_slotted.data, "test")
-        self.assertEqual(slotted.header.version, "1.0")
-        self.assertEqual(non_slotted.header.version, "1.0")
-        
-        # Slotted message should not have __dict__ (memory optimization)
-        self.assertFalse(hasattr(slotted, '__dict__'), 
-                        "Slotted message should not have __dict__")
 
 
 if __name__ == '__main__':

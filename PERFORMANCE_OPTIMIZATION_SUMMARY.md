@@ -7,8 +7,7 @@ The BaseMessage class was experiencing high CPU load due to several performance 
 2. **AUTO header creation inefficiency** - Every message creation triggered new Header instantiation
 3. **Regex recompilation** - Version validation pattern was recompiled on every validation
 4. **Deprecated serialization method** - Using `dict()` instead of optimized `model_dump()`
-5. **Memory inefficiency** - No use of `__slots__` for memory optimization
-6. **Large data processing** - Image messages showed particularly poor performance
+5. **Large data processing** - Image messages showed particularly poor performance
 
 ## Optimizations Implemented
 
@@ -31,8 +30,6 @@ AUTO = Field(default_factory=Header)  # Creates new Header() every time
 _VERSION_PATTERN = re.compile(r"^[0-9]+\.[0-9]+(\.[0-9]+)?$")
 
 class Header(BaseMessage):
-    __slots__ = ()  # Memory optimization
-    
     @field_validator('version')
     @classmethod
     def validate_version(cls, v: str) -> str:
@@ -60,8 +57,6 @@ class BaseMessage(BaseModel, metaclass=ABCMeta):
 **After:**
 ```python
 class BaseMessage(BaseModel, metaclass=ABCMeta):
-    __slots__ = ()  # Memory optimization
-    
     def to_rawdata(self) -> RawData:
         return RawData.cbor_from_native_object(self.model_dump())  # Optimized method
 ```
@@ -69,7 +64,6 @@ class BaseMessage(BaseModel, metaclass=ABCMeta):
 ### 3. Message Class Optimizations
 
 **Applied to RGBA, Image, Homography classes:**
-- Added `__slots__ = ()` for memory efficiency
 - Changed `Header()` to `Header.get_default()` in factory methods
 - Maintained full backward compatibility
 
@@ -98,7 +92,6 @@ class BaseMessage(BaseModel, metaclass=ABCMeta):
 | Metric | Before | After | Improvement |
 |--------|--------|-------|-------------|
 | Header objects created | 100 | 1 | **99% reduction** |
-| Memory usage | Standard | Optimized with `__slots__` | **Significant reduction** |
 
 ### Validation Performance
 | Operation | Before | After | Improvement |
@@ -127,9 +120,8 @@ class BaseMessage(BaseModel, metaclass=ABCMeta):
 The optimizations result in:
 - **3x faster** header creation
 - **2.5x faster** serialization
-- **99% reduction** in header object creation
+- **99% reduction** in header object creation through header pooling
 - **2x faster** regex validation
-- **Significant memory savings** through `__slots__` and object pooling
 - **Thread-safe** implementation
 - **Zero breaking changes**
 

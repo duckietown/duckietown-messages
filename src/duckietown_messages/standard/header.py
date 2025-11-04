@@ -29,9 +29,6 @@ _header_pool = _HeaderPool()
 
 
 class Header(BaseMessage):
-    # Use __slots__ to reduce memory overhead
-    __slots__ = ()
-    
     # version of the message this header is attached to
     version: str = Field(
         description="Version of the message this header is attached to",

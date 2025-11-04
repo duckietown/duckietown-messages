@@ -41,9 +41,6 @@ SUPPORTED_ENCODINGS: Dict[str, ImageEncoding] = {
 
 
 class Image(BaseMessage):
-    # Use __slots__ for memory efficiency  
-    __slots__ = ()
-    
     # header
     header: Header = AUTO
 
