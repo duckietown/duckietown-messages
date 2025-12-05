@@ -41,7 +41,7 @@ version = get_version_from_source("src/duckietown_messages/__init__.py")
 #     dependencies = list(filter(lambda line: not line.startswith('#'), fin.read().splitlines()))
 
 install_requires = [
-    "pydantic>=2,<3",
+    "pydantic>=1.8,<3",
     "numpy",
     "pyturbojpeg",
     "Pillow",

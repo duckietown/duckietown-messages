@@ -1,5 +1,6 @@
 import dataclasses
-from typing import Callable, Dict, Literal
+from typing import Callable, Dict
+from typing_extensions import Literal
 
 import numpy as np
 from pydantic import Field
