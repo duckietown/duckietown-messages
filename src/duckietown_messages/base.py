@@ -28,4 +28,5 @@ class BaseMessage(BaseModel, metaclass=ABCMeta):
             raise DataDecodingError(f"Error while parsing {cls.__name__} from {rd}: {e}", e)
 
     def to_rawdata(self) -> RawData:
-        return RawData.cbor_from_native_object(self.dict())
+        # Use model_dump() instead of deprecated dict() method for better performance
+        return RawData.cbor_from_native_object(self.model_dump())

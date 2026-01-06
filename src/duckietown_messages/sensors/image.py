@@ -80,7 +80,7 @@ class Image(BaseMessage):
         encoder: ImageEncoding = SUPPORTED_ENCODINGS[encoding]
         h, w, c, *_ = im.shape + (1,)
         msg = Image(
-            header=header or Header(),
+            header=header or Header.get_default(),
             width=w,
             height=h,
             encoding=encoding,
