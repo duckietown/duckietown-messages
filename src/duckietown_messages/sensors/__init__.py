@@ -3,6 +3,7 @@ from .button_event import ButtonEvent
 from .camera import Camera
 from .compressed_image import CompressedImage
 from .image import Image
+from .imu import Imu
 from .linear_accelerations import LinearAccelerations
 from .range import Range
 from .range_finder import RangeFinder
