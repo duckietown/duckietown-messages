@@ -1,14 +1,12 @@
 from typing import Optional
 
-from duckietown_messages.actuators import CarLights, DifferentialPWM
 from duckietown_messages.base import BaseMessage
-from duckietown_messages.standard import Boolean
 from duckietown_messages.standard.header import AUTO, Header
+
+from .world_entity_output import WorldEntityOutput
 
 
 class WorldOutput(BaseMessage):
     header: Header = AUTO
     session_id: Optional[int] = None
-    differential_pwm: Optional[DifferentialPWM] = None
-    car_lights: Optional[CarLights] = None
-    state_reset_flag: Optional[Boolean] = None
+    entities: Optional[dict[str, WorldEntityOutput]] = None
