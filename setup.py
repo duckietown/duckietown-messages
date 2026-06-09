@@ -1,4 +1,6 @@
-from setuptools import find_packages, setup
+from __future__ import annotations
+
+from setuptools import find_packages, setup  # type: ignore[import-untyped]
 
 # :==> Fill in your project data here
 package_name = "duckietown-messages"
@@ -18,12 +20,21 @@ if "<" in package_name:
 # Read version from the __init__ file
 def get_version_from_source(filename):
     import ast
+
     v = None
     with open(filename) as f:
         for line in f:
             if line.startswith("__version__"):
-                v = ast.parse(line).body[0].value.s
-                break
+                assignment = ast.parse(line).body[0]
+                if not isinstance(assignment, ast.Assign):
+                    continue
+                value = assignment.value
+                if isinstance(value, ast.Constant) and isinstance(
+                    value.value,
+                    str,
+                ):
+                    v = value.value
+                    break
         else:
             raise ValueError("No version found in %r." % filename)
     if v is None:
@@ -40,16 +51,12 @@ version = get_version_from_source("src/duckietown_messages/__init__.py")
 # with open(dependencies_file, 'rt') as fin:
 #     dependencies = list(filter(lambda line: not line.startswith('#'), fin.read().splitlines()))
 
-install_requires = [
-    "pydantic>=2,<3",
-    "numpy",
-    "pyturbojpeg",
-    "Pillow",
-    "pytransform3d"
-]
-tests_require = [
-    "dtps-http",
-]
+install_requires = ["pydantic>=2,<3", "numpy", "pyturbojpeg", "Pillow", "pytransform3d"]
+extras_require = {
+    "tests": [
+        "dtps-http",
+    ]
+}
 
 # compile description
 underline = "=" * (len(package_name) + len(short_description) + 2)
@@ -65,7 +72,7 @@ description = """
     underline=underline,
 )
 
-console_scripts = []
+console_scripts: list[str] = []
 
 # setup package
 setup(
@@ -73,8 +80,8 @@ setup(
     author=maintainer,
     author_email=maintainer_email,
     url=library_webpage,
-    tests_require=tests_require,
     install_requires=install_requires,
+    extras_require=extras_require,
     package_dir={"": "src"},
     packages=find_packages("./src"),
     long_description=description,
