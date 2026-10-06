@@ -51,10 +51,17 @@ version = get_version_from_source("src/duckietown_messages/__init__.py")
 # with open(dependencies_file, 'rt') as fin:
 #     dependencies = list(filter(lambda line: not line.startswith('#'), fin.read().splitlines()))
 
-install_requires = ["pydantic>=2,<3", "numpy", "pyturbojpeg", "Pillow", "pytransform3d"]
+install_requires = [
+    "pydantic>=2,<3",
+    "numpy",
+    "pyturbojpeg",
+    "Pillow",
+    "pytransform3d",
+    "dtps-http>=1.6.1,<2",
+]
 extras_require = {
     "tests": [
-        "dtps-http",
+        "dtps-http>=1.6.1,<2",
     ]
 }
 

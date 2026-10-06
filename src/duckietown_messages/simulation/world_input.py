@@ -11,3 +11,6 @@ class WorldInput(BaseMessage):
     header: Header = AUTO
     session_id: Optional[int] = None
     entities: Optional[dict[str, WorldEntityInput]] = None
+
+    def to_native(self) -> dict:
+        return self.model_dump(exclude_none=True)
