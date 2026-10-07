@@ -13,3 +13,4 @@ class CameraIntrinsicCalibration(BaseMessage):
     D: list = Field(description="Distortion coefficients")
     P: list = Field(description="Projection matrix (flattened)")
     R: Optional[list] = Field(description="Rectification matrix (flattened)", default=None)
+    distortion_model: str = Field(description="Distortion model (plumb_bob or equidistant)", default="plumb_bob")
