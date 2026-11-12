@@ -1,5 +1,6 @@
 from dtps_http import RawData
 from duckietown_messages.actuators import DifferentialPWM
+from duckietown_messages.geometry_3d import Position, Quaternion, Transformation
 from duckietown_messages.sensors import CompressedImage, Imu, Range
 from duckietown_messages.simulation import (
     WorldEntityInput,
@@ -64,6 +65,32 @@ def test_native_world_output_codec_preserves_zero_and_false() -> None:
     assert entity["differential_pwm"]["left"] == 0.0
     assert entity["state_reset_flag"]["data"] is False
     assert WorldOutput.from_rawdata(message.to_rawdata()) == message
+
+
+def test_native_world_output_codec_preserves_reset_pose() -> None:
+    pose = Transformation(
+        position=Position(x=1.25, y=0.0, z=0.4),
+        rotation=Quaternion(w=0.0, x=0.0, y=0.0, z=1.0),
+    )
+    message = WorldOutput(
+        session_id=3,
+        entities={
+            "robot": WorldEntityOutput(
+                state_reset_flag=Boolean(data=True),
+                state_reset_pose=pose,
+            ),
+        },
+    )
+    position = message.to_native()["entities"]["robot"]["state_reset_pose"]["position"]
+    assert (position["x"], position["y"], position["z"]) == (1.25, 0.0, 0.4)
+    decoded = WorldOutput.from_rawdata(message.to_rawdata())
+    assert decoded == message
+    assert decoded.entities is not None
+    assert decoded.entities["robot"].state_reset_pose == pose
+    # a reset without a pose stays as it was
+    plain = WorldOutput(entities={"robot": WorldEntityOutput(state_reset_flag=Boolean(data=True))})
+    assert "state_reset_pose" not in plain.to_native()["entities"]["robot"]
+    assert WorldOutput.from_rawdata(plain.to_rawdata()) == plain
 
 
 def test_native_world_codec_supports_empty_aggregates_and_resets() -> None:
